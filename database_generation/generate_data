@@ -1,0 +1,105 @@
+import random
+import pymongo
+import faker
+from bson.objectid import ObjectId
+from pymongo import MongoClient
+
+fake = faker.Faker()
+
+def generate_employee():
+    # Generate a boolean value for whether this employee is HR.
+    is_hr = random.random() < 0.1
+
+    # Define a list of job roles specific to insurance companies.
+    insurance_roles = [
+        'Underwriter', 'Claim Adjuster', 'Insurance Agent',
+        'Insurance Broker', 'Actuary', 'Insurance Analyst', 'Insurance Sales Representative',
+        'Loss Control Consultant', 'Insurance Investigator',
+        'Claims Processor', 'Policy Underwriter', 'Insurance Consultant',
+        'Fraud Investigator', 'Insurance Auditor', 'Customer Service Representative',
+        'Insurance Coordinator', 'Benefits Analyst', 'Health Insurance Specialist',
+        'Life Insurance Agent', 'Property and Casualty Underwriter', 'Reinsurance Analyst'
+    ]
+
+    engineering_roles = [
+        'Software Engineer', 'Senior Software Engineer',
+        'Senior Data Scientist', 'Data Scientist', 'Senior Data Engineer', 'Data Engineer',
+        'Frontend Developer', 'Backend Developer', 'Full Stack Developer', 'Machine Learning Engineer',
+        'DevOps Engineer', 'Business Analyst', 'Database Administrator',
+        'Cloud Architect', 'Network Engineer', 'Security Engineer',
+        'UI/UX Designer', 'Quality Assurance Engineer', 'System Administrator',
+        'Embedded Systems Engineer', 'Robotics Engineer', 'Artificial Intelligence Engineer'
+    ]
+
+    business_roles = [
+        'Commercial Surety Underwriting Trainee', 'Accountant', 'Financial Analyst', 'Marketing Associate',
+        'Operations Associate', 'Sales Associate', 'Business Development Associate',
+        'Supply Chain Associate', 'Management Consultant', 'Investment Analyst',
+        'Project', 'Administrative Assistant', 'Customer Service Representative', 'Procurement Specialist',
+        'Business Systems Analyst', 'Operations Analyst', 'Compliance Officer', 'Auditor',
+        'Business Intelligence Analyst', 'Market Research Analyst', 'Public Relations', 'HR'
+    ]
+
+    # Depending on whether they're HR, assign appropriate job role and title.
+    if is_hr:
+        job_role = 'HR'
+        role = 'HR'
+    else:
+        role_branch = random.choice([insurance_roles, engineering_roles, business_roles])
+        job_role = random.choice(role_branch)
+        role = 'Employee'
+
+    city = random.choice(['Hartford', 'Minneapolis', 'New York', 'San Francisco', 'Los Angeles'])
+
+    base_salary = 0
+    if job_role in engineering_roles:
+        base_salary = round(random.gauss(95000, 15000))
+    if job_role in insurance_roles:
+        base_salary = round(random.gauss(70000, 5000))
+    if job_role in business_roles:
+        base_salary = round(random.gauss(60000, 5000))
+    # Generate a salary, with a city-based bonus for certain locations.
+    city_bonus = 20000 if city in ['New York', 'San Francisco', 'Los Angeles'] else 0
+
+    salary = base_salary + city_bonus
+
+    return {
+        "name": fake.name(),
+        "phoneNumber": fake.phone_number(),
+        "jobRole": job_role,
+        "workLocation": city,
+        "salary": salary,
+        "manager": None,  # Will be filled in later if necessary.
+        "role": role,
+    }
+
+def populate_database(num_employees):
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['hackathon_travelers']
+    employees = db['employees']
+
+    manager_ids = []
+
+    # First, generate some employees to serve as managers.
+    for _ in range(num_employees // 10):  # Let's say 10% of employees are managers.
+        manager = generate_employee()
+        manager["role"] = "Manager"  # Explicitly set role as Manager.
+        manager["jobRole"] += " Manager"
+        result = employees.insert_one(manager)
+        manager_ids.append(result.inserted_id)
+
+    # If we have no managers (e.g., num_employees < 10), create at least one.
+    if not manager_ids:
+        manager = generate_employee()
+        manager["role"] = "Manager"  # Explicitly set role as Manager.
+        manager["jobRole"] += " Manager"
+        result = employees.insert_one(manager)
+        manager_ids.append(result.inserted_id)
+
+    # Then, generate the rest of the employees, randomly assigning them managers.
+    for _ in range(num_employees - len(manager_ids)):
+        employee = generate_employee()
+        employee['manager'] = ObjectId(random.choice(manager_ids))
+        employees.insert_one(employee)
+
+populate_database(50)
