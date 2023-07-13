@@ -4,7 +4,7 @@ import UserContext from './UserContext'; // import UserContext
 import Home from './components/Home';
 import EmployeeDetails from './components/EmployeeDetails';
 import LoginBox from './components/LoginBox';
-import SalaryPredictor from './components/salary_predictor';
+import SalaryPredictor from './components/salary_predictor'; // Import SalaryPredictor
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -47,6 +47,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employee/:id" element={<EmployeeDetails />} />
+            <Route path="/predict" element={<SalaryPredictor />} /> {/* New route for SalaryPredictor */}
           </Routes>
         </Router>
       </div>
