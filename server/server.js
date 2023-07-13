@@ -7,10 +7,9 @@ const { PythonShell } = require('python-shell');
 const app = express();
 const port = 4000;
 
-// Enable CORS
 app.use(cors());
+app.use(express.json());
 
-// Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/hackathon_travelers', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -99,17 +98,16 @@ app.post('/api/predict_salary', (req, res) => {
 
     let options = {
         mode: 'text',
-        pythonOptions: ['-u'],
-        scriptPath: '../models/',
+        pythonOptions: ['-u'], 
+        scriptPath: 'C:\Workspace\Pharmani\models\predict.py',
         args: [jobRole, workLocation]
     };
 
     PythonShell.run('predict.py', options, function(err, results) {
         if (err) {
-            console.error(err);
-            return res.status(500).json({ message: 'Python script execution error.' });
+            res.status(500).send(err);
         }
-        res.json({ predictedSalary: Number(results[0]) });
+        res.send({ predictedSalary: Number(results[0]) });
     });
 });
 
