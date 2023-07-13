@@ -4,9 +4,9 @@ import joblib
 import pandas as pd
 
 # Load the model and encoders
-model = joblib.load('salary_model.pkl')
-job_role_encoder = joblib.load('job_role_encoder.pkl')
-work_location_encoder = joblib.load('work_location_encoder.pkl')
+model = joblib.load('C:/Hackathon/Pharmani/models/salary_model.pkl')
+job_role_encoder = joblib.load('C:/Hackathon/Pharmani/models/job_role_encoder.pkl')
+work_location_encoder = joblib.load('C:/Hackathon/Pharmani/models/work_location_encoder.pkl')
 
 # Read JSON input from stdin
 input_data = json.load(sys.stdin)
