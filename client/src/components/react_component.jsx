@@ -16,7 +16,10 @@ function SalaryPredictor() {
         } catch (error) {
             console.error(`Error predicting salary: ${error}`);
         }
+
+        console.log(predictedSalary);
     }
+
 
     return (
         <div>
