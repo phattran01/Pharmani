@@ -1,0 +1,15 @@
+.login-box {
+    /* Set position to fixed, and set top and left to 50% to center the box */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* Use transform to fine tune the position */
+    transform: translate(-50%, -50%);
+    /* Other styles */
+    padding: 20px;
+    border: 1px solid black;
+    background: white;
+    /* Set transition for the opacity */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
