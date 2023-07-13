@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import UserContext from './UserContext'; // import UserContext
+import UserContext from './UserContext';
 import Home from './components/Home';
 import EmployeeDetails from './components/EmployeeDetails';
 import LoginBox from './components/LoginBox';
-import SalaryPredictor from './components/salary_predictor'; // Import SalaryPredictor
+import SalaryPredictor from './components/SalaryPredictor'; // Import the SalaryPredictor component
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
-  const [user, setUser] = useState(null); // user state
+  const [user, setUser] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
 
-  // This function will be called when the backdrop is clicked
   const closeLoginBox = () => {
     setShowLogin(false);
   };
@@ -19,15 +18,15 @@ function App() {
   const handleSuccessfulLogin = (username) => {
     setUser(username);
     setShowNotification(true);
-    setTimeout(() => setShowNotification(false), 3000); // The notification will disappear after 3 seconds
+    setTimeout(() => setShowNotification(false), 3000);
   };
 
   const handleLogout = () => {
-    setUser(null); // Reset the user data when logging out
+    setUser(null);
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}> {/* provide the user state to other components */}
+    <UserContext.Provider value={{ user, setUser }}>
       <div>
         {showNotification && <div className="notification">You've successfully logged in, Welcome {user}</div>}
         <div>
@@ -40,14 +39,11 @@ function App() {
             </div>
           )}
         </div>
-        <div>
-            <SalaryPredictor />
-        </div>
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employee/:id" element={<EmployeeDetails />} />
-            <Route path="/predict" element={<SalaryPredictor />} /> {/* New route for SalaryPredictor */}
+            <Route path="/predict_salary" element={<SalaryPredictor />} /> {/* Add the SalaryPredictor component to the routing */}
           </Routes>
         </Router>
       </div>
