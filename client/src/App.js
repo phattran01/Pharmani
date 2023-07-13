@@ -4,6 +4,7 @@ import UserContext from './UserContext'; // import UserContext
 import Home from './components/Home';
 import EmployeeDetails from './components/EmployeeDetails';
 import LoginBox from './components/LoginBox';
+import SalaryPredictor from './components/salary_predictor';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -38,6 +39,9 @@ function App() {
               <LoginBox onSuccessfulLogin={handleSuccessfulLogin} />
             </div>
           )}
+        </div>
+        <div>
+            <SalaryPredictor />
         </div>
         <Router>
           <Routes>
