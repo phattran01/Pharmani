@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
 import UserContext from '../UserContext';
 import '../styles/LoginBox.css'; //Assuming you have a CSS file for styling
 
@@ -13,16 +12,24 @@ function LoginBox() {
     e.preventDefault();
     try {
       // Update the URL and data according to your API
-      const response = await axios.post('http://localhost:4000/api/login', {
-        username,
-        password
+      const response = await fetch('http://localhost:4000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
       });
 
-      if(response.data.success) {
-        setUser(response.data.user); // store the full user object, not just the username
+      const data = await response.json();
+
+      if(data.success) {
+        setUser(data.user); // store the full user object, not just the username
         setError(null);
       } else {
-        setError(response.data.message);
+        setError(data.message);
       }
     } catch (error) {
       setError(error.message);
