@@ -11,9 +11,18 @@ work_location_encoder = joblib.load('work_location_encoder.pkl')
 jobRole = sys.argv[1]
 workLocation = sys.argv[2]
 
-# Perform label encoding
-jobRole_encoded = job_role_encoder.transform([jobRole])
-workLocation_encoded = work_location_encoder.transform([workLocation])
+# Perform label encoding with handling for unseen labels
+try:
+    jobRole_encoded = job_role_encoder.transform([jobRole])
+except ValueError:
+    print("Unseen label for jobRole")
+    sys.exit(1)
+
+try:
+    workLocation_encoded = work_location_encoder.transform([workLocation])
+except ValueError:
+    print("Unseen label for workLocation")
+    sys.exit(1)
 
 # Create a DataFrame
 X = pd.DataFrame({
