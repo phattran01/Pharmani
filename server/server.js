@@ -127,7 +127,8 @@ app.post('/api/predict_salary', (req, res) => {
         mode: 'text',
         pythonOptions: ['-u'], 
         scriptPath: 'C:/Hackathon/Pharmani/models',
-        args: [jobRole, workLocation]
+        args: [JSON.stringify({ jobRole, workLocation })],
+        pythonPath: 'python'
     };
 
     PythonShell.run('predict.py', options, function(err, results) {
