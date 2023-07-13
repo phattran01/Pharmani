@@ -3,7 +3,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const Employee = require('../models/Employee');
 const { PythonShell } = require('python-shell');
-const bcrypt = require('bcrypt'); // for hashing password, install it using npm i bcrypt
 
 const app = express();
 const port = 4000;
@@ -108,8 +107,7 @@ app.post('/api/login', async (req, res) => {
       }
   
       // Check if password matches
-      const match = await bcrypt.compare(password, user.password); // assumes user.password is hashed
-      if (!match) {
+      if (password !== user.password) {
         return res.status(401).json({ success: false, message: 'Invalid password.' });
       }
   

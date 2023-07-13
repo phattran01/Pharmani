@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/LoginBox.css'; //Assuming you have a CSS file for styling
+import '../styles/LoginBox.css'; 
 
-function LoginBox() {
+function LoginBox({ onSuccessfulLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Update the URL and data according to your API
             const response = await axios.post('http://localhost:4000/api/login', {
                 username,
                 password
             });
 
             if(response.data.success) {
-                // Handle successful login. E.g. Store user info to context or local storage
+                console.log("Login Successful!");
+                setError(null);
+                onSuccessfulLogin(username);
             } else {
-                // Handle error. E.g. show error message
+                setError(response.data.message);
             }
-
         } catch (error) {
             console.error(`Error login: ${error}`);
+            setError(error.message);
         }
     }
 
@@ -47,6 +49,7 @@ function LoginBox() {
                 />
                 <button type="submit">Login</button>
             </form>
+            {error && <div>{error}</div>} 
         </div>
     );
 }
