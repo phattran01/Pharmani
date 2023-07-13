@@ -18,12 +18,13 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    // Apply filters
-        const filtered = employees.filter((employee) => {
+      // Apply filters
+      const filtered = employees.filter((employee) => {
         const matchJobCategory = jobCategoryFilter ? employee.jobCategory === jobCategoryFilter : true;
         const matchRole = roleFilter ? employee.role === roleFilter : true;
         return matchJobCategory && matchRole;
-    });
+      });
+
     setFilteredEmployees(filtered);
   }, [jobCategoryFilter, roleFilter, employees]);
 
@@ -42,7 +43,6 @@ const Home = () => {
         <label htmlFor="jobCategoryFilter">Job Category:</label>
         <select id="jobCategoryFilter" value={jobCategoryFilter} onChange={handleJobCategoryFilter}>
           <option value="">All</option>
-          {/* Add more job categories as options */}
           <option value="Insurance">Insurance</option>
           <option value="Business">Business</option>
           <option value="Engineering">Engineering</option>

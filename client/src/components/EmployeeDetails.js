@@ -7,8 +7,8 @@ const EmployeeDetails = () => {
 
   useEffect(() => {
     fetch(`http://localhost:4000/api/employees/${id}`)
-      .then((response) => response.json())
-      .then((data) => setEmployee(data));
+    .then((response) => response.json())
+    .then((data) => setEmployee(data));
   }, [id]);
 
   if (!employee) {
