@@ -8,8 +8,8 @@ model = joblib.load('C:/Hackathon/Pharmani/models/salary_model.pkl')
 job_role_encoder = joblib.load('C:/Hackathon/Pharmani/models/job_role_encoder.pkl')
 work_location_encoder = joblib.load('C:/Hackathon/Pharmani/models/work_location_encoder.pkl')
 
-# Read JSON input from stdin
-input_data = json.load(sys.stdin)
+# Read JSON input from command line
+input_data = json.loads(sys.argv[1])
 
 # Read the job role and location from the input data
 jobRole = input_data['jobRole']
