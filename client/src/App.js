@@ -43,7 +43,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employee/:id" element={<EmployeeDetails />} />
-            <Route path="/predict_salary" element={<SalaryPredictor />} /> {/* Add the SalaryPredictor component to the routing */}
+            <Route path="/predict_salary" element={<SalaryPredictor />} />
           </Routes>
         </Router>
       </div>
