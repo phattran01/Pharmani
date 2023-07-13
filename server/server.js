@@ -1,12 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
-const Employee = require('../models/Employee'); // Import your Employee schema
+const Employee = require('../models/Employee');
 
 const app = express();
-const port = 5000;
+const port = 4000;
+
+// Enable CORS
+app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/hackathon_travelers', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/hackathon_travelers', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 app.use(express.json()); // Use middleware to parse JSON
 
@@ -25,11 +32,19 @@ app.post('/api/employees', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
-
-// GET an employee by id
+// GET all employees
+app.get('/api/employees', async (req, res) => {
+    try {
+        const employees = await Employee.find();
+        res.json(employees);
+    } catch(err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+// GET an employee by UUID
 app.get('/api/employees/:id', async (req, res) => {
     try {
-        const employee = await Employee.findById(req.params.id);
+        const employee = await Employee.findOne({ id: req.params.id });
         if(employee == null) {
             return res.status(404).json({ message: 'Employee not found' });
         }

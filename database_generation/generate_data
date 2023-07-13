@@ -1,6 +1,12 @@
+# Generates employee data and populates a MongoDB database with the generated records. 
+# It randomly assigns job roles from different categories (insurance, engineering, and business) to employees. 
+# It also assigns managers to the employees and calculates their salaries based on the job role and location. 
+# The database is populated with a specified number of employee records.
+
 import random
 import pymongo
 import faker
+import uuid
 from bson.objectid import ObjectId
 from pymongo import MongoClient
 
@@ -44,10 +50,17 @@ def generate_employee():
     if is_hr:
         job_role = 'HR'
         role = 'HR'
+        job_category = 'HR'
     else:
         role_branch = random.choice([insurance_roles, engineering_roles, business_roles])
         job_role = random.choice(role_branch)
         role = 'Employee'
+        if role_branch == insurance_roles:
+            job_category = 'Insurance'
+        elif role_branch == engineering_roles:
+            job_category = 'Engineering'
+        elif role_branch == business_roles:
+            job_category = 'Business'
 
     city = random.choice(['Hartford', 'Minneapolis', 'New York', 'San Francisco', 'Los Angeles'])
 
@@ -64,8 +77,10 @@ def generate_employee():
     salary = base_salary + city_bonus
 
     return {
+        "id": str(uuid.uuid4()),  # Generate a UUID for this employee.
         "name": fake.name(),
         "phoneNumber": fake.phone_number(),
+        "jobCategory": job_category,
         "jobRole": job_role,
         "workLocation": city,
         "salary": salary,
@@ -102,4 +117,4 @@ def populate_database(num_employees):
         employee['manager'] = ObjectId(random.choice(manager_ids))
         employees.insert_one(employee)
 
-populate_database(50)
+populate_database(10)
