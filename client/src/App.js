@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import UserContext from './UserContext'; // import UserContext
+import UserContext from './UserContext';
 import Home from './components/Home';
 import EmployeeDetails from './components/EmployeeDetails';
 import LoginBox from './components/LoginBox';
-import SalaryPredictor from './components/salary_predictor'; // Import SalaryPredictor
+import SalaryPredictor from './components/SalaryPredictor'; // Import the SalaryPredictor component
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
 
   const closeLoginBox = () => {
@@ -19,6 +20,7 @@ function App() {
     setUser(user);
     setShowNotification(true);
     setTimeout(() => setShowNotification(false), 3000); 
+    setTimeout(() => setShowNotification(false), 3000);
   };
 
   const handleLogout = () => {
@@ -39,14 +41,11 @@ function App() {
             </div>
           )}
         </div>
-        <div>
-            <SalaryPredictor />
-        </div>
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employee/:id" element={<EmployeeDetails />} />
-            <Route path="/predict" element={<SalaryPredictor />} />
+            <Route path="/predict_salary" element={<SalaryPredictor />} /> {/* Add the SalaryPredictor component to the routing */}
           </Routes>
         </Router>
       </div>

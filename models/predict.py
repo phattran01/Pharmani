@@ -1,28 +1,23 @@
+import sys
+import json
 import joblib
 import pandas as pd
-import sys
 
 # Load the model and encoders
 model = joblib.load('salary_model.pkl')
 job_role_encoder = joblib.load('job_role_encoder.pkl')
 work_location_encoder = joblib.load('work_location_encoder.pkl')
 
-# Read inputs from the command line
-jobRole = sys.argv[1]
-workLocation = sys.argv[2]
+# Read JSON input from stdin
+input_data = json.load(sys.stdin)
 
-# Perform label encoding with handling for unseen labels
-try:
-    jobRole_encoded = job_role_encoder.transform([jobRole])
-except ValueError:
-    print("Unseen label for jobRole")
-    sys.exit(1)
+# Read the job role and location from the input data
+jobRole = input_data['jobRole']
+workLocation = input_data['workLocation']
 
-try:
-    workLocation_encoded = work_location_encoder.transform([workLocation])
-except ValueError:
-    print("Unseen label for workLocation")
-    sys.exit(1)
+# Perform label encoding
+jobRole_encoded = job_role_encoder.transform([jobRole])
+workLocation_encoded = work_location_encoder.transform([workLocation])
 
 # Create a DataFrame
 X = pd.DataFrame({
