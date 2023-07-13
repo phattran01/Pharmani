@@ -1,0 +1,5 @@
+"scripts": {
+  "start": "npm run start:react && npm run start:express",
+  "start:react": "react-scripts start",
+  "start:express": "node server.js"
+}
