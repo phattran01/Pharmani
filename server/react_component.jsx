@@ -8,7 +8,7 @@ function SalaryPredictor() {
 
     const predictSalary = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/', {
+            const response = await axios.post('http://localhost:4000/api/predict_salary', {
                 jobRole,
                 workLocation
             });

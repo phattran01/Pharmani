@@ -1,7 +1,8 @@
 import pandas as pd
-from sklearn.externals import joblib
+from pymongo import MongoClient
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import LabelEncoder
+import joblib
 
 # IMPORTANT :: Requires populated MongoDB collection 'employees' 
 client = MongoClient('mongodb://localhost:27017/')
