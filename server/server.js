@@ -100,7 +100,7 @@ app.post('/api/predict_salary', (req, res) => {
     let options = {
         mode: 'text',
         pythonOptions: ['-u'],
-        scriptPath: '/path/to/',
+        scriptPath: '../models/',
         args: [jobRole, workLocation]
     };
 
