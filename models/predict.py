@@ -1,30 +1,27 @@
-import sys
 import joblib
 import pandas as pd
+import sys
 
 # Load the model and encoders
 model = joblib.load('salary_model.pkl')
 label_encoder = joblib.load('label_encoder.pkl')
 
-def predict_salary(jobRole, workLocation):
-    jobRole_encoded = label_encoder.transform([jobRole])
-    workLocation_encoded = label_encoder.transform([workLocation])
+# Read inputs from the command line
+jobRole = sys.argv[1]
+workLocation = sys.argv[2]
 
-    # Create DataFrame
-    X = pd.DataFrame({
-        'jobRole': jobRole_encoded,
-        'workLocation': workLocation_encoded
-    }, index=[0])  # <--- important
+# Perform label encoding
+jobRole_encoded = label_encoder.transform([jobRole])
+workLocation_encoded = label_encoder.transform([workLocation])
 
-    # Predict salary
-    salary = model.predict(X)
-    
-    return salary[0]
+# Create a DataFrame
+X = pd.DataFrame({
+    'jobRole': jobRole_encoded,
+    'workLocation': workLocation_encoded
+}, index=[0])
 
-if __name__ == "__main__":
-    job_role = sys.argv[1]
-    work_location = sys.argv[2]
+# Predict salary
+predicted_salary = model.predict(X)
 
-    predicted_salary = predict_salary(job_role, work_location)
-
-    print(predicted_salary)  # print the result so it can be captured by PythonShell
+# Output the prediction
+print(predicted_salary[0])
