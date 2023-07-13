@@ -95,7 +95,7 @@ app.put('/api/employees/:id', async (req, res) => {
 
 const { PythonShell } = require('python-shell');
 
-app.post('/api/predict', (req, res) => {
+app.post('/api/predict_salary', (req, res) => {
     const { jobRole, workLocation } = req.body;
 
     let options = {
