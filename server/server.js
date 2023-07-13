@@ -112,7 +112,8 @@ app.post('/api/login', async (req, res) => {
       }
   
       // If username and password match, login is successful
-      res.json({ success: true, message: 'Login successful.' });
+      const userResponse = { ...user._doc, password: undefined }; // make sure to not send back the password
+      res.json({ success: true, user: userResponse });
   
     } catch (error) {
       res.status(500).json({ success: false, message: 'Server error.' });

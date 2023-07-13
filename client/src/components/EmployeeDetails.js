@@ -22,7 +22,7 @@ const EmployeeDetails = () => {
     if (!user) {
       return false;
     }
-    if (user.role === "hr" || user.username === employee.manager || user.username === employee.username) {
+    if (user.role === "HR" || user.username === employee.manager || user.username === employee.username) {
       return true;
     }
     return false;

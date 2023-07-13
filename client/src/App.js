@@ -8,35 +8,34 @@ import SalaryPredictor from './components/salary_predictor'; // Import SalaryPre
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
-  const [user, setUser] = useState(null); // user state
+  const [user, setUser] = useState(null); 
   const [showNotification, setShowNotification] = useState(false);
 
-  // This function will be called when the backdrop is clicked
   const closeLoginBox = () => {
     setShowLogin(false);
   };
 
-  const handleSuccessfulLogin = (username) => {
-    setUser(username);
+  const handleSuccessfulLogin = (user) => {
+    setUser(user);
     setShowNotification(true);
-    setTimeout(() => setShowNotification(false), 3000); // The notification will disappear after 3 seconds
+    setTimeout(() => setShowNotification(false), 3000); 
   };
 
   const handleLogout = () => {
-    setUser(null); // Reset the user data when logging out
+    setUser(null);
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}> {/* provide the user state to other components */}
+    <UserContext.Provider value={{ user, setUser }}>
       <div>
-        {showNotification && <div className="notification">You've successfully logged in, Welcome {user}</div>}
+        {showNotification && <div className="notification">You've successfully logged in, Welcome {user.name}</div>}
         <div>
           <button onClick={user ? handleLogout : () => setShowLogin(true)}>
-            {user ? user : 'Login'}
+            {user ? user.username : 'Login'}
           </button>
           {showLogin && (
             <div onClick={closeLoginBox} style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)'}}>
-              <LoginBox onSuccessfulLogin={handleSuccessfulLogin} />
+              <LoginBox />
             </div>
           )}
         </div>
@@ -47,7 +46,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employee/:id" element={<EmployeeDetails />} />
-            <Route path="/predict" element={<SalaryPredictor />} /> {/* New route for SalaryPredictor */}
+            <Route path="/predict" element={<SalaryPredictor />} />
           </Routes>
         </Router>
       </div>
