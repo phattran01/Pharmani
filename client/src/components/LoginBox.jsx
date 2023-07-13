@@ -41,8 +41,8 @@ function LoginBox() {
   };
 
   return (
-    <div className="login-box">
-      <form onSubmit={handleSubmit} onClick={stopPropagation}>
+    <div className="login-box" onClick={stopPropagation}>
+      <form onSubmit={handleSubmit}>
         <input 
           type="text" 
           value={username} 
