@@ -26,8 +26,12 @@ function LoginBox() {
         }
     }
 
+    const stopPropagation = (e) => {
+        e.stopPropagation();
+    };
+
     return (
-        <div className="login-box">
+        <div className="login-box" onClick={stopPropagation}>
             <form onSubmit={handleSubmit}>
                 <input 
                     type="text" 

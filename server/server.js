@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const Employee = require('../models/Employee');
 const { PythonShell } = require('python-shell');
+const bcrypt = require('bcrypt'); // for hashing password, install it using npm i bcrypt
 
 const app = express();
 const port = 4000;
@@ -90,6 +91,33 @@ app.put('/api/employees/:id', async (req, res) => {
         res.json(updatedEmployee);
     } catch(err) {
         res.status(500).json({ message: err.message });
+    }
+});
+
+// User login route
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+  
+    try {
+      // Find user in database
+      const user = await Employee.findOne({ username: username });
+  
+      // Check if user exists
+      if (!user) {
+        return res.status(401).json({ success: false, message: 'Invalid username.' });
+      }
+  
+      // Check if password matches
+      const match = await bcrypt.compare(password, user.password); // assumes user.password is hashed
+      if (!match) {
+        return res.status(401).json({ success: false, message: 'Invalid password.' });
+      }
+  
+      // If username and password match, login is successful
+      res.json({ success: true, message: 'Login successful.' });
+  
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Server error.' });
     }
 });
 
