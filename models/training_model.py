@@ -21,10 +21,12 @@ for employee in employees.find():
 # Create pandas DataFrame
 df = pd.DataFrame(data)
 
-# Encode categories
-label_encoder = LabelEncoder()
-df['jobRole'] = label_encoder.fit_transform(df['jobRole'])
-df['workLocation'] = label_encoder.fit_transform(df['workLocation'])
+# Encode categories using different encoders
+job_role_encoder = LabelEncoder()
+work_location_encoder = LabelEncoder()
+
+df['jobRole'] = job_role_encoder.fit_transform(df['jobRole'])
+df['workLocation'] = work_location_encoder.fit_transform(df['workLocation'])
 
 # Split into features (X) and target variable (y)
 X = df[['jobRole', 'workLocation']]
@@ -38,4 +40,5 @@ model.fit(X, y)
 joblib.dump(model, 'salary_model.pkl')
 
 # Save the encoders
-joblib.dump(label_encoder, 'label_encoder.pkl')
+joblib.dump(job_role_encoder, 'job_role_encoder.pkl')
+joblib.dump(work_location_encoder, 'work_location_encoder.pkl')
