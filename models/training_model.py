@@ -1,8 +1,7 @@
 import pandas as pd
-import pickle
+from sklearn.externals import joblib
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import LabelEncoder
-from pymongo import MongoClient
 
 # IMPORTANT :: Requires populated MongoDB collection 'employees' 
 client = MongoClient('mongodb://localhost:27017/')
@@ -22,11 +21,9 @@ for employee in employees.find():
 df = pd.DataFrame(data)
 
 # Encode categories
-jobRole_encoder = LabelEncoder()
-df['jobRole'] = jobRole_encoder.fit_transform(df['jobRole'])
-
-workLocation_encoder = LabelEncoder()
-df['workLocation'] = workLocation_encoder.fit_transform(df['workLocation'])
+label_encoder = LabelEncoder()
+df['jobRole'] = label_encoder.fit_transform(df['jobRole'])
+df['workLocation'] = label_encoder.fit_transform(df['workLocation'])
 
 # Split into features (X) and target variable (y)
 X = df[['jobRole', 'workLocation']]
@@ -36,8 +33,8 @@ y = df['salary']
 model = LinearRegression()
 model.fit(X, y)
 
-# Save model and encoders
-with open('model.pkl', 'wb') as model_file, open('jobRole_encoder.pkl', 'wb') as jobRole_file, open('workLocation_encoder.pkl', 'wb') as workLocation_file:
-    pickle.dump(model, model_file)
-    pickle.dump(jobRole_encoder, jobRole_file)
-    pickle.dump(workLocation_encoder, workLocation_file)
+# Save the model
+joblib.dump(model, 'salary_model.pkl')
+
+# Save the encoders
+joblib.dump(label_encoder, 'label_encoder.pkl')
