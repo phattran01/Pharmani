@@ -99,7 +99,7 @@ app.post('/api/predict_salary', (req, res) => {
     let options = {
         mode: 'text',
         pythonOptions: ['-u'], 
-        scriptPath: 'C:\Workspace\Pharmani\models\predict.py',
+        scriptPath: 'C:\\Workspace\\Pharmani\\models',
         args: [jobRole, workLocation]
     };
 

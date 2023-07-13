@@ -2,16 +2,22 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import EmployeeDetails from './components/EmployeeDetails';
+// import LoginBox from './components/LoginBox';
+import SalaryPredictor from './components/react_component'
+
 
 function App() {
-  const [showLogin, setShowLogin] = useState(false);
+  // const [showLogin, setShowLogin] = useState(false);
 
   return (
     <div>
-        <div>
+        {/* <div>
             <button onClick={() => setShowLogin(true)}>Login</button>
 
             {showLogin && <LoginBox />}
+        </div> */}
+        <div>
+          <SalaryPredictor />
         </div>
       <Router>
         <Routes>
