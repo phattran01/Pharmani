@@ -8,8 +8,8 @@ const SalaryPredictor = () => {
 
     const handlePredictSalary = async () => {
         const payload = {
-            jobRole,
-            workLocation
+            'jobRole' : jobRole,
+            'workLocation' : workLocation
         };
         setIsLoading(true);
         try {

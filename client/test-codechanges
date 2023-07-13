@@ -1,22 +1,57 @@
-[1] C:\Workspace\Pharmani\node_modules\python-shell\index.js:311
-[1]             error = new PythonShellError(text);
-[1]                     ^
+(node:4684) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' opt
+ion is deprecated. Please use the 'setupMiddlewares' option.
+[0] Starting the development server...
+[0]
+[0] Compiled successfully!
+[0]
+[0] You can now view client in the browser.
+[0]
+[0]   Local:            http://localhost:3000
+[0]   On Your Network:  http://10.0.1.38:3000
+[0]
+[0] Note that the development build is not optimized.
+[0] To create a production build, use npm run build.
+[0]
+[0] webpack compiled successfully
+[1] node:internal/process/promises:279
+[1]             triggerUncaughtException(err, true /* fromPromise */);
+[1]             ^
 [1]
-[1] PythonShellError: python: can't open file 'C:\\Hackathon\\Pharmani\\models\\predict.py': [Errno 2] No such file or directory
-[1]
-[1]     at PythonShell.parseError (C:\Workspace\Pharmani\node_modules\python-shell\index.js:311:21)
-[1]     at terminateIfNeeded (C:\Workspace\Pharmani\node_modules\python-shell\index.js:193:32)
-[1]     at ChildProcess.<anonymous> (C:\Workspace\Pharmani\node_modules\python-shell\index.js:185:13)
+[1] PythonShellError: json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[1]     at PythonShell.parseError (C:\Hackathon\Pharmani\node_modules\python-shell\index.js:303:21)
+[1]     at terminateIfNeeded (C:\Hackathon\Pharmani\node_modules\python-shell\index.js:193:32)
+[1]     at ChildProcess.<anonymous> (C:\Hackathon\Pharmani\node_modules\python-shell\index.js:185:13)
 [1]     at ChildProcess.emit (node:events:527:28)
-[1]     at Process.ChildProcess._handle.onexit (node:internal/child_process:291:12) {
+[1]     at Process.ChildProcess._handle.onexit (node:internal/child_process:291:12)
+[1]     ----- Python Traceback -----
+[1]     File "C:\Hackathon\Pharmani\models\predict.py", line 12, in <module>
+[1]       input_data = json.load(sys.stdin)
+[1]     File "C:\Users\wasadmin\anaconda3\lib\json\__init__.py", line 293, in load
+[1]       return loads(fp.read(),
+[1]     File "C:\Users\wasadmin\anaconda3\lib\json\__init__.py", line 346, in loads
+[1]       return _default_decoder.decode(s)
+[1]     File "C:\Users\wasadmin\anaconda3\lib\json\decoder.py", line 337, in decode
+[1]       obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+[1]     File "C:\Users\wasadmin\anaconda3\lib\json\decoder.py", line 355, in raw_decode
+[1]       raise JSONDecodeError("Expecting value", s, err.value) from None {
+[1]   traceback: 'Traceback (most recent call last):\r\n' +
+[1]     '  File "C:\\Hackathon\\Pharmani\\models\\predict.py", line 12, in <module>\r\n' +
+[1]     '    input_data = json.load(sys.stdin)\r\n' +
+[1]     '  File "C:\\Users\\wasadmin\\anaconda3\\lib\\json\\__init__.py", line 293, in load\r\n' +
+[1]     '    return loads(fp.read(),\r\n' +
+[1]     '  File "C:\\Users\\wasadmin\\anaconda3\\lib\\json\\__init__.py", line 346, in loads\r\n' +
+[1]     '    return _default_decoder.decode(s)\r\n' +
+[1]     '  File "C:\\Users\\wasadmin\\anaconda3\\lib\\json\\decoder.py", line 337, in decode\r\n' +
+[1]     '    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\r\n' +
+[1]     '  File "C:\\Users\\wasadmin\\anaconda3\\lib\\json\\decoder.py", line 355, in raw_decode\r\n' +
+[1]     '    raise JSONDecodeError("Expecting value", s, err.value) from None\r\n' +
+[1]     'json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\r\n',
 [1]   executable: 'python',
 [1]   options: [ '-u' ],
 [1]   script: 'C:\\Hackathon\\Pharmani\\models\\predict.py',
-[1]   args: [ 'Data Scientist', 'Hartford' ],
-[1]   exitCode: 2,
+[1]   args: [ 'HR', 'Los Angeles' ],
+[1]   exitCode: 1,
 [1]   logs: []
 [1] }
 [0] Proxy error: Could not proxy request /api/predict_salary from localhost:3000 to http://localhost:4000/.
 [0] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
-[0]
-[1] npm run start:server exited with code 1
