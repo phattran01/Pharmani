@@ -94,3 +94,23 @@ app.put('/api/employees/:id', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+// Test Data
+
+const { PythonShell } = require('python-shell');
+
+app.post('/api/predict', (req, res) => {
+    const { jobRole, workLocation } = req.body;
+
+    let options = {
+        mode: 'text',
+        pythonOptions: ['-u'],
+        scriptPath: '/path/to/',
+        args: [jobRole, workLocation]
+    };
+
+    PythonShell.run('predict.py', options, function(err, results) {
+        if (err) throw err; // generic error
+        res.json({ predictedSalary: results[0] });
+    });
+});
