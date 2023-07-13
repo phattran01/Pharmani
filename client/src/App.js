@@ -9,7 +9,6 @@ import SalaryPredictor from './components/SalaryPredictor'; // Import the Salary
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [user, setUser] = useState(null); 
-  const [user, setUser] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
 
   const closeLoginBox = () => {
