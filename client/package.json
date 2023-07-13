@@ -13,14 +13,17 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "concurrently": "^6.5.1"
+  },
   "scripts": {
-  "start": "concurrently \"npm run start:react\" \"npm run start:server\"",
-  "start:react": "react-scripts start",
-  "start:server": "node path/to/your/server.js",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-}
+    "start": "concurrently \"npm run start:react\" \"npm run start:server\"",
+    "start:react": "react-scripts start",
+    "start:server": "node ../server/index.js", // update this to the path of your server file
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -38,8 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.0"
   }
 }
