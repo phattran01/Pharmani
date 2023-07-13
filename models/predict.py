@@ -1,5 +1,6 @@
 import joblib
 import pandas as pd
+import sys
 
 # Load the model and encoders
 model = joblib.load('salary_model.pkl')
@@ -19,3 +20,9 @@ def predict_salary(jobRole, workLocation):
     salary = model.predict(X)
     
     return salary[0]
+
+if __name__ == "__main__":
+    jobRole = sys.argv[1]
+    workLocation = sys.argv[2]
+    salary = predict_salary(jobRole, workLocation)
+    print(salary)
