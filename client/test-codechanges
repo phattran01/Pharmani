@@ -1,35 +1,19 @@
-"scripts": {
-  "start": "npm run start:react && npm run start:express",
-  "start:react": "react-scripts start",
-  "start:express": "node server.js"
-}
-
-[1] node:internal/process/promises:279
-[1]             triggerUncaughtException(err, true /* fromPromise */);
-[1]             ^
+[1] C:\Workspace\Pharmani\node_modules\python-shell\index.js:311
+[1]             error = new PythonShellError(text);
+[1]                     ^
 [1]
-[1] PythonShellError: FileNotFoundError: [Errno 2] No such file or directory: 'salary_model.pkl'
-[1]     at PythonShell.parseError (C:\Workspace\Pharmani\node_modules\python-shell\index.js:303:21)
+[1] PythonShellError: python: can't open file 'C:\\Hackathon\\Pharmani\\models\\predict.py': [Errno 2] No such file or directory
+[1]
+[1]     at PythonShell.parseError (C:\Workspace\Pharmani\node_modules\python-shell\index.js:311:21)
 [1]     at terminateIfNeeded (C:\Workspace\Pharmani\node_modules\python-shell\index.js:193:32)
 [1]     at ChildProcess.<anonymous> (C:\Workspace\Pharmani\node_modules\python-shell\index.js:185:13)
 [1]     at ChildProcess.emit (node:events:527:28)
-[1]     at Process.ChildProcess._handle.onexit (node:internal/child_process:291:12)
-[1]     ----- Python Traceback -----
-[1]     File "C:\Workspace\Pharmani\models\predict.py", line 7, in <module>
-[1]       model = joblib.load('salary_model.pkl')
-[1]     File "C:\Users\wasadmin\anaconda3\lib\site-packages\joblib\numpy_pickle.py", line 579, in load
-[1]       with open(filename, 'rb') as f: {
-[1]   traceback: 'Traceback (most recent call last):\r\n' +
-[1]     '  File "C:\\Workspace\\Pharmani\\models\\predict.py", line 7, in <module>\r\n' +
-[1]     "    model = joblib.load('salary_model.pkl')\r\n" +
-[1]     '  File "C:\\Users\\wasadmin\\anaconda3\\lib\\site-packages\\joblib\\numpy_pickle.py", line 579, in load\r\n' +
-[1]     "    with open(filename, 'rb') as f:\r\n" +
-[1]     "FileNotFoundError: [Errno 2] No such file or directory: 'salary_model.pkl'\r\n",
+[1]     at Process.ChildProcess._handle.onexit (node:internal/child_process:291:12) {
 [1]   executable: 'python',
 [1]   options: [ '-u' ],
-[1]   script: 'C:\\Workspace\\Pharmani\\models\\predict.py',
-[1]   args: [ 'Network Engineer Manager', 'Hartford' ],
-[1]   exitCode: 1,
+[1]   script: 'C:\\Hackathon\\Pharmani\\models\\predict.py',
+[1]   args: [ 'Data Scientist', 'Hartford' ],
+[1]   exitCode: 2,
 [1]   logs: []
 [1] }
 [0] Proxy error: Could not proxy request /api/predict_salary from localhost:3000 to http://localhost:4000/.
