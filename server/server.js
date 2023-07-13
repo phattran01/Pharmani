@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const Employee = require('../models/Employee');
+const { PythonShell } = require('python-shell');
 
 const app = express();
 const port = 4000;
@@ -32,6 +33,7 @@ app.post('/api/employees', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
+
 // GET all employees
 app.get('/api/employees', async (req, res) => {
     try {
@@ -41,6 +43,7 @@ app.get('/api/employees', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
 // GET an employee by UUID
 app.get('/api/employees/:id', async (req, res) => {
     try {
@@ -91,10 +94,6 @@ app.put('/api/employees/:id', async (req, res) => {
     }
 });
 
-// Test Data
-
-const { PythonShell } = require('python-shell');
-
 app.post('/api/predict_salary', (req, res) => {
     const { jobRole, workLocation } = req.body;
 
@@ -106,8 +105,11 @@ app.post('/api/predict_salary', (req, res) => {
     };
 
     PythonShell.run('predict.py', options, function(err, results) {
-        if (err) throw err; // generic error
-        res.json({ predictedSalary: results[0] });
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'Python script execution error.' });
+        }
+        res.json({ predictedSalary: Number(results[0]) });
     });
 });
 
