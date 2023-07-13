@@ -1,32 +1,30 @@
 import sys
 import json
-import joblib
+import pickle
 import pandas as pd
 
-# Load the model and encoders
-model = joblib.load('C:/Hackathon/Pharmani/models/salary_model.pkl')
-job_role_encoder = joblib.load('C:/Hackathon/Pharmani/models/job_role_encoder.pkl')
-work_location_encoder = joblib.load('C:/Hackathon/Pharmani/models/work_location_encoder.pkl')
+# Load the pre-trained model
+with open('C:/Hackathon/Pharmani/models/salary_model.pkl', 'rb') as f:
+    model = pickle.load(f)
 
-# Read JSON input from command line
-input_data = json.loads(sys.argv[1])
+# Load the encoders
+with open('C:/Hackathon/Pharmani/models/job_role_encoder.pkl', 'rb') as f:
+    job_role_encoder = pickle.load(f)
 
-# Read the job role and location from the input data
-jobRole = input_data['jobRole']
-workLocation = input_data['workLocation']
+with open('C:/Hackathon/Pharmani/models/work_location_encoder.pkl', 'rb') as f:
+    work_location_encoder = pickle.load(f)
+
+# Read data from stdin
+json_data = sys.stdin.read()
+data = json.loads(json_data)
+jobRole = [item['jobRole'] for item in data]
+workLocation = [item['workLocation'] for item in data]
 
 # Perform label encoding
-jobRole_encoded = job_role_encoder.transform([jobRole])
-workLocation_encoded = work_location_encoder.transform([workLocation])
+jobRole_encoded = job_role_encoder.transform(jobRole)
+workLocation_encoded = work_location_encoder.transform(workLocation)
 
-# Create a DataFrame
-X = pd.DataFrame({
-    'jobRole': jobRole_encoded,
-    'workLocation': workLocation_encoded
-}, index=[0])
-
-# Predict salary
-predicted_salary = model.predict(X)
-
-# Output the prediction
-print(predicted_salary[0])
+# Perform the prediction
+df = pd.DataFrame(list(zip(jobRole_encoded, workLocation_encoded)), columns=['jobRole', 'workLocation'])
+predictions = model.predict(df)
+print(predictions)
