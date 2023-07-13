@@ -14,7 +14,9 @@ const EmployeeSchema = new Schema({
     workLocation: String,
     salary: Number,
     manager: Schema.Types.ObjectId,
-    role: String
+    role: String,
+    username: String,
+    password: String  // This should be a hashed version of the password.
 });
 
 const Employee = mongoose.model('Employee', EmployeeSchema);

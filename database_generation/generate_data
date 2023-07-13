@@ -76,6 +76,12 @@ def generate_employee():
 
     salary = base_salary + city_bonus
 
+    # Generate a username.
+    username = fake.user_name()
+
+    # Generate a password
+    # The pw_strength argument can be used to specify the complexity of the password.
+    password = fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True)
     return {
         "id": str(uuid.uuid4()),  # Generate a UUID for this employee.
         "name": fake.name(),
@@ -86,6 +92,8 @@ def generate_employee():
         "salary": salary,
         "manager": None,  # Will be filled in later if necessary.
         "role": role,
+        "username": username,
+        "password": password,
     }
 
 def populate_database(num_employees):
