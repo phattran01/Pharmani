@@ -1,40 +1,72 @@
-[1] node:internal/process/promises:279
-[1]             triggerUncaughtException(err, true /* fromPromise */);
-[1]             ^
-[1] 
-[1] PythonShellError: json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
-[1]     at PythonShell.parseError (C:\Workspace\Pharmani\node_modules\python-shell\index.js:303:21)
-[1]     at terminateIfNeeded (C:\Workspace\Pharmani\node_modules\python-shell\index.js:193:32)
-[1]     at ChildProcess.<anonymous> (C:\Workspace\Pharmani\node_modules\python-shell\index.js:185:13)
-[1]     at ChildProcess.emit (node:events:527:28)
-[1]     at Process.ChildProcess._handle.onexit (node:internal/child_process:291:12)
-[1]     ----- Python Traceback -----
-[1]     File "C:\Workspace\Pharmani\models\predict.py", line 19, in <module>
-[1]       data = json.loads(json_data)
-[1]     File "C:\Users\wasadmin\anaconda3\lib\json\__init__.py", line 346, in loads
-[1]       return _default_decoder.decode(s)
-[1]     File "C:\Users\wasadmin\anaconda3\lib\json\decoder.py", line 337, in decode
-[1]       obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-[1]     File "C:\Users\wasadmin\anaconda3\lib\json\decoder.py", line 355, in raw_decode
-[1]       raise JSONDecodeError("Expecting value", s, err.value) from None {
-[1]   traceback: 'Traceback (most recent call last):\r\n' +
-[1]     '  File "C:\\Workspace\\Pharmani\\models\\predict.py", line 19, in <module>\r\n' +
-[1]     '    data = json.loads(json_data)\r\n' +
-[1]     '  File "C:\\Users\\wasadmin\\anaconda3\\lib\\json\\__init__.py", line 346, in loads\r\n' +
-[1]     '    return _default_decoder.decode(s)\r\n' +
-[1]     '  File "C:\\Users\\wasadmin\\anaconda3\\lib\\json\\decoder.py", line 337, in decode\r\n' +
-[1]     '    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\r\n' +
-[1]     '  File "C:\\Users\\wasadmin\\anaconda3\\lib\\json\\decoder.py", line 355, in raw_decode\r\n' +
-[1]     '    raise JSONDecodeError("Expecting value", s, err.value) from None\r\n' +
-[1]     'json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\r\n',
-[1]   executable: 'python',
-[1]   options: [ '-u' ],
-[1]   script: 'C:\\Workspace\\Pharmani\\models\\predict.py',
-[1]   args: [ '{"jobRole":"HR","workLocation":"San Francisco"}' ],
-[1]   exitCode: 1,
-[1]   logs: []
-[1] }
-[0] Proxy error: Could not proxy request /api/predict_salary from localhost:3000 to http://localhost:4000/.
-[0] See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNRESET).
-[0] 
-[1] npm run start:server exited with code 1
+Slide 1:
+Project Overview
+
+Goal: Develop a React web application for an enterprise-wide employee directory.
+
+Objectives:
+
+    Enable employees to search for other employees in the directory.
+    Provide essential employee information, including name, phone number, job role, work location, and salary.
+    Implement salary confidentiality rules:
+        Employees can view their own salary.
+        Managers can view the salary of their direct reports.
+        HR employees can view anyone's salary.
+
+Slide 2:
+Building the Application
+
+Goal: Create a robust web application using MongoDB as the backend and Node.js as the web service.
+
+Objectives:
+
+    Utilize MongoDB to store and retrieve employee data.
+    Develop a Node.js web service to handle data operations.
+    Implement a responsive and user-friendly web application using React.
+
+Slide 3:
+Data Analysis
+
+Goal: Build a solution to predict salary based on job role and location.
+
+Objectives:
+
+    Generate and populate the MongoDB database with a minimum of 1000 dummy data records.
+    Train a Linear Regression model using scikit-learn to predict salary.
+    Create a React component that communicates with the model via a RESTful service.
+    Enable the user to input job role and location and display the predicted salary.
+
+Slide 4:
+Implementation Details
+
+    Backend:
+        Use MongoDB as the backend database.
+        Develop a Node.js web service to handle CRUD operations.
+        Ensure data security and privacy.
+
+    Frontend:
+        Build the web application using React.
+        Implement an intuitive and responsive user interface.
+        Enable efficient searching and browsing of the employee directory.
+
+    Salary Prediction:
+        Generate dummy data using a script and populate the database.
+        Train a Linear Regression model in scikit-learn to predict salaries.
+        Integrate the model with the React frontend using a RESTful service.
+
+Slide 5:
+Conclusion
+
+    Achieved Goals:
+        Developed a React web application for an enterprise-wide employee directory.
+        Implemented salary confidentiality rules for viewing employee salaries.
+        Built a data analysis solution to predict salary based on job role and location.
+
+    Benefits:
+        Improved employee search and information retrieval process.
+        Enhanced data security and privacy for confidential salary information.
+        Enabled salary prediction to assist in decision-making processes.
+
+    Future Enhancements:
+        Expand the functionality to include additional employee information.
+        Implement user authentication and access control for improved security.
+        Enhance the predictive model by incorporating additional factors.
