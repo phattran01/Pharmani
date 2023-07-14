@@ -2,8 +2,15 @@
   font-family: 'BattersonSans Light';
   src: url('../fonts/BattersonSans-Light.otf') format('opentype');
 }
+@font-face {
+  font-family: 'BattersonSans Bold';
+  src: url('../fonts/BattersonSans-Bold.otf') format('opentype');
+}
 .body {
   background-color: #f6f6f6;
+}
+.title {
+  font-family: 'BattersonSans Bold', sans-serif;
 }
 .container {
     font-family: 'BattersonSans Light', sans-serif;
