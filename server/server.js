@@ -125,14 +125,15 @@ app.post('/api/predict_salary', (req, res) => {
     let options = {
         mode: 'text',
         pythonOptions: ['-u'], 
-        scriptPath: path.join(__dirname, '../models/'),  // Adjust if your Python script is in a different directory
+        scriptPath: 'C:/Workspace/Pharmani/models/',  // Updated path
         args: [JSON.stringify(req.body)]
     };
 
     PythonShell.run('predict.py', options, function(err, results) {
-        if (err) throw err;
-        // results is an array consisting of messages collected during execution
-        res.json(JSON.parse(results[0]));
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.send({ predictedSalary: Number(results[0]) });
     });
 });
 
