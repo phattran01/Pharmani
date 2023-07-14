@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const Employee = require('../models/Employee');
 const { PythonShell } = require('python-shell');
+const path = require('path');
 
 const app = express();
 const port = 4000;
@@ -121,21 +122,17 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.post('/api/predict_salary', (req, res) => {
-    const { jobRole, workLocation } = req.body;
-
     let options = {
         mode: 'text',
         pythonOptions: ['-u'], 
-        scriptPath: 'C:/Workspace/Pharmani/models/',
-        args: [JSON.stringify({ jobRole, workLocation })],
-        pythonPath: 'python'
+        scriptPath: path.join(__dirname, '../models/'),  // Adjust if your Python script is in a different directory
+        args: [JSON.stringify(req.body)]
     };
 
     PythonShell.run('predict.py', options, function(err, results) {
-        if (err) {
-            res.status(500).send(err);
-        }
-        res.send({ predictedSalary: Number(results[0]) });
+        if (err) throw err;
+        // results is an array consisting of messages collected during execution
+        res.json(JSON.parse(results[0]));
     });
 });
 
