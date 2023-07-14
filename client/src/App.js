@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import UserContext from './UserContext';
 import Home from './components/Home';
 import EmployeeDetails from './components/EmployeeDetails';
@@ -29,33 +29,35 @@ function App() {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <div className='body'>
-        <div className='nav-bar'>
-          <div className="topbar">
-            <img src={logo} alt="Travelers Logo" />
-            <button className = "login-button" onClick={user ? handleLogout : () => setShowLogin(true)}>
-              {user ? user.username : 'Login'}
-            </button>
-          </div>
-          {showNotification && <div className="notification">You've successfully logged in, Welcome {user.name}</div>}
-          <div>
-            {showLogin && (
-              <div onClick={closeLoginBox} style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)'}}>
-                <LoginBox />
-              </div>
-            )}
-          </div>
-          <Router>
+    <Router>
+      <UserContext.Provider value={{ user, setUser }}>
+        <div className='body'>
+          <div className='nav-bar'>
+            <div className="topbar">
+              <Link to="/">
+                <img src={logo} alt="Travelers Logo" />
+              </Link>
+              <button className="login-button" onClick={user ? handleLogout : () => setShowLogin(true)}>
+                {user ? user.username : 'Login'}
+              </button>
+            </div>
+            {showNotification && <div className="notification">You've successfully logged in, Welcome {user.name}</div>}
+            <div>
+              {showLogin && (
+                <div onClick={closeLoginBox} style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                  <LoginBox />
+                </div>
+              )}
+            </div>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/employee/:id" element={<EmployeeDetails />} />
               <Route path="/predict_salary" element={<SalaryPredictor />} />
             </Routes>
-          </Router>
+          </div>
         </div>
-      </div>
-    </UserContext.Provider>
+      </UserContext.Provider>
+    </Router>
   );
 }
 
