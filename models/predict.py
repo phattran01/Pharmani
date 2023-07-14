@@ -4,14 +4,14 @@ import pickle
 import pandas as pd
 
 # Load the pre-trained model
-with open('salary_model.pkl', 'rb') as f:
+with open('./salary_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 # Load the encoders
-with open('job_role_encoder.pkl', 'rb') as f:
+with open('./job_role_encoder.pkl', 'rb') as f:
     job_role_encoder = pickle.load(f)
 
-with open('work_location_encoder.pkl', 'rb') as f:
+with open('./work_location_encoder.pkl', 'rb') as f:
     work_location_encoder = pickle.load(f)
 
 # Read data from stdin
