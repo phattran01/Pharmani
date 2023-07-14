@@ -2,81 +2,203 @@
   font-family: 'BattersonSans Light';
   src: url('../fonts/BattersonSans-Light.otf') format('opentype');
 }
+
 @font-face {
   font-family: 'BattersonSans Bold';
   src: url('../fonts/BattersonSans-Bold.otf') format('opentype');
 }
+
 .body {
   background-color: #f6f6f6;
 }
+
 .title {
   font-family: 'BattersonSans Bold', sans-serif;
+  margin-bottom: -7px;
 }
+
 .container {
-    font-family: 'BattersonSans Light', sans-serif;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
+  font-family: 'BattersonSans Light', sans-serif;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container-boxes {
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .nav-bar {
   font-family: 'BattersonSans Light', sans-serif;
 }
-  .login-button {
-    position: 'fixed';
-    padding: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    width: '100%'; 
-    height: '100%';
-    background-color: white;
-    border: 1px solid #ddd;
-  }
-  .login-button:hover {
-    background-color: #dadada;
-  }
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    padding-bottom: 20px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
-  }
-  .second-bar {
-    
-  }
-  
-  .topbar img {
-    height: 50px; /* adjust this as needed */
-    padding-left: 20px;
-  }
-  .employee-boxes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .employee-box {
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    overflow: hidden;
-  }
 
-  .employee-box img {
-    width: 75%;
-    border-radius: 50%; /* Makes the box circular */
-    overflow: hidden; /* Hides any content outside the circular shape */
-    height: auto;
-    margin-bottom: 10px;
-  }
+.nav-link {
+  font-family: 'BattersonSans Bold', sans-serif;
+  color: #afafaf;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+#navLink.nav-link:hover {
+  color: #d62727;
+}
+
+.nav-link:visited {
+  color: #afafaf;
+  text-decoration: none;
+}
+
+.video-container {
+  position: relative;
+  margin-bottom: -6px;
+}
+
+.stock-video {
+  width: 100%;
+}
+
+.video-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.video-text h2 {
+  font-size: 3vw;
+}
+
+.video-text p {
+  font-size: 2.1vw;
+}
+
+.second-bar {
+  background-color: red;
+  padding: 10px;
+  color: white;
+  display: block;
+  position: relative; 
+  transition: top 0.3s; 
+  top: 0; 
+  z-index: 10; 
+}
+
+.second-bar.sticky {
+  position: sticky;
+  top: 0; 
+}
+
+.filter {
+  font-size: 20px;
+  display: inline;
+  padding-right: 20px;
+}
+
+.filter select {
+  font-size: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 5px;
+  border: 1px solid #ddd;
+  color: #797979;
+}
+
+.login-button {
+  position: 'fixed';
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: '100%'; 
+  height: '100%';
+  background-color: white;
+  border: 1px solid #ddd;
+}
+.login-button:hover {
+  background-color: #dadada;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  padding-bottom: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.topbar img {
+  height: 50px; /* adjust this as needed */
+  padding-left: 10vw;
+  margin-right: -25vw;
+}
+
+.employee-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.employee-box {
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.employee-box img {
+  width: 75%;
+  border-radius: 50%; 
+  overflow: hidden; 
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.employee-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.employee-link:hover {
+  background-color: #dadada;
+}
+
+.employee-link:visited {
+  color: inherit;
+  text-decoration: none;
+}
+.employee-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.employee-name {
+  font-weight: bold;
+}
+
+.employee-role {
+  font-size: 0.8em;
+}
+
+.load-more {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

@@ -15,6 +15,7 @@ const EmployeeSchema = new Schema({
     salary: Number,
     manager: { type: Schema.Types.ObjectId, ref: 'Employee' },  // referencing the same 'Employee' model
     role: String,
+    gender: String,
     username: String,
     password: String
 });

@@ -29,7 +29,7 @@ const PredictSalary = () => {
                 </label>
                 <input type="submit" value="Predict Salary" />
             </form>
-            {predictedSalary && <h2>Predicted Salary: {predictedSalary}</h2>}
+            {predictedSalary && <h2>Predicted Salary: ${predictedSalary.toFixed(2)}</h2>}
         </div>
     );
 };

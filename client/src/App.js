@@ -37,6 +37,7 @@ function App() {
               <Link to="/">
                 <img src={logo} alt="Travelers Logo" />
               </Link>
+              <Link to="/predict_salary" id="navLink" className="nav-link">Salary Calculator</Link>
               <button className="login-button" onClick={user ? handleLogout : () => setShowLogin(true)}>
                 {user ? user.username : 'Login'}
               </button>
@@ -44,17 +45,17 @@ function App() {
             {showNotification && <div className="notification">You've successfully logged in, Welcome {user.name}</div>}
             <div>
               {showLogin && (
-                <div onClick={closeLoginBox} style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                <div onClick={closeLoginBox} style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000}}>
                   <LoginBox />
                 </div>
               )}
             </div>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/employee/:id" element={<EmployeeDetails />} />
-              <Route path="/predict_salary" element={<PredictSalary />} />
-            </Routes>
           </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/employee/:id" element={<EmployeeDetails />} />
+            <Route path="/predict_salary" element={<PredictSalary />} />
+          </Routes>
         </div>
       </UserContext.Provider>
     </Router>

@@ -16,6 +16,12 @@ def generate_employee():
     # Generate a boolean value for whether this employee is HR.
     is_hr = random.random() < 0.1
 
+    # Generate a gender for the employee
+    gender = random.choice(["men", "women"])
+
+    # Depending on the gender, generate an appropriate name.
+    name = fake.name_male() if gender == "men" else fake.name_female()
+
     # Define a list of job roles specific to insurance companies.
     insurance_roles = [
         'Underwriter', 'Claim Adjuster', 'Insurance Agent',
@@ -84,7 +90,7 @@ def generate_employee():
     password = fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True)
     return {
         "id": str(uuid.uuid4()),  # Generate a UUID for this employee.
-        "name": fake.name(),
+        "name": name,
         "phoneNumber": fake.phone_number(),
         "jobCategory": job_category,
         "jobRole": job_role,
@@ -92,6 +98,7 @@ def generate_employee():
         "salary": salary,
         "manager": None,  # Will be filled in later if necessary.
         "role": role,
+        "gender": gender,
         "username": username,
         "password": password,
     }
@@ -125,4 +132,4 @@ def populate_database(num_employees):
         employee['manager'] = ObjectId(random.choice(manager_ids))
         employees.insert_one(employee)
 
-populate_database(280)
+populate_database(1000)
