@@ -132,7 +132,16 @@ app.post('/api/predict_salary', (req, res) => {
     let pyshell = new PythonShell('predict.py', options);
 
     pyshell.on('message', function (message) {
-        res.send({ predictedSalary: Number(message) });
+        try {
+            let data = JSON.parse(message);
+            if(data.error) {
+                res.status(500).send(data.error);
+            } else {
+                res.send({ predictedSalary: Number(data.predictedSalary)});
+            }
+        } catch (err) {
+            console.error(err)
+        }
     });
 
     pyshell.send(JSON.stringify(req.body));
