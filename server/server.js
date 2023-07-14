@@ -126,14 +126,21 @@ app.post('/api/predict_salary', (req, res) => {
         mode: 'text',
         pythonOptions: ['-u'], 
         scriptPath: 'C:/Workspace/Pharmani/models/',
-        args: [JSON.stringify(req.body)]
+        pythonPath: 'C:/Users/wasadmin/anaconda3/python.exe'
     };
 
-    PythonShell.run('predict.py', options, function(err, results) {
+    let pyshell = new PythonShell('predict.py', options);
+
+    pyshell.on('message', function (message) {
+        res.send({ predictedSalary: Number(message) });
+    });
+
+    pyshell.send(JSON.stringify(req.body));
+
+    pyshell.end(function(err) {
         if (err) {
             res.status(500).send(err);
         }
-        res.send({ predictedSalary: Number(results[0]) });
     });
 });
 

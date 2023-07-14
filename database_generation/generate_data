@@ -125,4 +125,4 @@ def populate_database(num_employees):
         employee['manager'] = ObjectId(random.choice(manager_ids))
         employees.insert_one(employee)
 
-populate_database(10)
+populate_database(280)

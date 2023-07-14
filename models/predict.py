@@ -1,21 +1,26 @@
 import sys
 import json
-import pickle
+import joblib
 import pandas as pd
+import os
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 # Load the pre-trained model
-with open('./salary_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+with open(os.path.join(dir_path, 'salary_model.pkl'), 'rb') as f:
+    model = joblib.load(f)
 
 # Load the encoders
-with open('./job_role_encoder.pkl', 'rb') as f:
-    job_role_encoder = pickle.load(f)
+with open(os.path.join(dir_path, 'job_role_encoder.pkl'), 'rb') as f:
+    job_role_encoder = joblib.load(f)
 
-with open('./work_location_encoder.pkl', 'rb') as f:
-    work_location_encoder = pickle.load(f)
+with open(os.path.join(dir_path, 'work_location_encoder.pkl'), 'rb') as f:
+    work_location_encoder = joblib.load(f)
 
 # Read data from stdin
 json_data = sys.stdin.read()
+
+# Debugging line
+print(f"Received JSON data: {json_data}", file=sys.stderr)
 
 try:
     data = json.loads(json_data)
