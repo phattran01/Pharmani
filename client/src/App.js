@@ -4,7 +4,7 @@ import UserContext from './UserContext';
 import Home from './components/Home';
 import EmployeeDetails from './components/EmployeeDetails';
 import LoginBox from './components/LoginBox';
-import SalaryPredictor from './components/salary_predictor'; // Import the SalaryPredictor component
+import PredictSalary from './components/PredictSalary';
 import logo from './imgs/Trav_Color.jpg'; // import the logo
 import './styles/main.css';
 
@@ -52,7 +52,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/employee/:id" element={<EmployeeDetails />} />
-              <Route path="/predict_salary" element={<SalaryPredictor />} />
+              <Route path="/predict_salary" element={<PredictSalary />} />
             </Routes>
           </div>
         </div>

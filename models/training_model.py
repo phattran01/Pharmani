@@ -8,7 +8,7 @@ import joblib
 client = MongoClient('mongodb://localhost:27017/')
 db = client['hackathon_travelers']
 employees = db['employees']
-
+folder_path = './models/'
 # Fetch data from collection
 data = []
 for employee in employees.find():
@@ -37,8 +37,8 @@ model = LinearRegression()
 model.fit(X, y)
 
 # Save the model
-joblib.dump(model, 'salary_model.pkl')
+joblib.dump(model, folder_path + 'salary_model.pkl')
 
 # Save the encoders
-joblib.dump(job_role_encoder, 'job_role_encoder.pkl')
-joblib.dump(work_location_encoder, 'work_location_encoder.pkl')
+joblib.dump(job_role_encoder, folder_path + 'job_role_encoder.pkl')
+joblib.dump(work_location_encoder, folder_path + 'work_location_encoder.pkl')
