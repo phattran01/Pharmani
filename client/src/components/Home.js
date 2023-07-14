@@ -12,18 +12,23 @@ const Home = () => {
     fetch('http://localhost:4000/api/employees')
       .then((response) => response.json())
       .then((data) => {
-        setEmployees(data);
-        setFilteredEmployees(data);
+        const updatedData = data.map((employee, index) => {
+          const gender = Math.random() > 0.5 ? 'men' : 'women';
+          const photoIndex = (index % 99) + 1;
+          employee.photo = `https://randomuser.me/api/portraits/${gender}/${photoIndex}.jpg`;
+          return employee;
+        });
+        setEmployees(updatedData);
+        setFilteredEmployees(updatedData);
       });
   }, []);
 
   useEffect(() => {
-      // Apply filters
-      const filtered = employees.filter((employee) => {
-        const matchJobCategory = jobCategoryFilter ? employee.jobCategory === jobCategoryFilter : true;
-        const matchRole = roleFilter ? employee.role === roleFilter : true;
-        return matchJobCategory && matchRole;
-      });
+    const filtered = employees.filter((employee) => {
+      const matchJobCategory = jobCategoryFilter ? employee.jobCategory === jobCategoryFilter : true;
+      const matchRole = roleFilter ? employee.role === roleFilter : true;
+      return matchJobCategory && matchRole;
+    });
 
     setFilteredEmployees(filtered);
   }, [jobCategoryFilter, roleFilter, employees]);
@@ -62,6 +67,7 @@ const Home = () => {
         {filteredEmployees.map((employee) => (
           <Link to={`/employee/${employee.id}`} key={employee.id}>
             <div className="employee-box">
+              <img src={employee.photo} alt={`${employee.name}'s headshot`} />
               {employee.name}
             </div>
           </Link>

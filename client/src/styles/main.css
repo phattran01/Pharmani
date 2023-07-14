@@ -1,5 +1,5 @@
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
@@ -8,13 +8,26 @@
   .employee-boxes {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 20px;
   }
   
   .employee-box {
-    background-color: #f0f0f0;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #ccc;
-    padding: 10px;
-    margin: 5px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .employee-box img {
+    width: 75%;
+    border-radius: 50%; /* Makes the box circular */
+    overflow: hidden; /* Hides any content outside the circular shape */
+    height: auto;
   }

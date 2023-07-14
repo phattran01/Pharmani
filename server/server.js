@@ -46,7 +46,7 @@ app.get('/api/employees', async (req, res) => {
 // GET an employee by UUID
 app.get('/api/employees/:id', async (req, res) => {
     try {
-        const employee = await Employee.findOne({ id: req.params.id });
+        const employee = await Employee.findOne({ id: req.params.id }).populate('manager');
         if(employee == null) {
             return res.status(404).json({ message: 'Employee not found' });
         }
@@ -126,7 +126,7 @@ app.post('/api/predict_salary', (req, res) => {
     let options = {
         mode: 'text',
         pythonOptions: ['-u'], 
-        scriptPath: 'C:/Hackathon/Pharmani/models',
+        scriptPath: 'C:/Workspace/Pharmani/models/',
         args: [JSON.stringify({ jobRole, workLocation })],
         pythonPath: 'python'
     };

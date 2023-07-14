@@ -13,10 +13,10 @@ const EmployeeSchema = new Schema({
     jobRole: String,
     workLocation: String,
     salary: Number,
-    manager: Schema.Types.ObjectId,
+    manager: { type: Schema.Types.ObjectId, ref: 'Employee' },  // referencing the same 'Employee' model
     role: String,
     username: String,
-    password: String  // This should be a hashed version of the password.
+    password: String
 });
 
 const Employee = mongoose.model('Employee', EmployeeSchema);
