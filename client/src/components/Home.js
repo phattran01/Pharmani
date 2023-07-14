@@ -43,24 +43,26 @@ const Home = () => {
 
   return (
     <div className="container">
-      <h2>Employee Names</h2>
-      <div className="filters">
-        <label htmlFor="jobCategoryFilter">Job Category:</label>
-        <select id="jobCategoryFilter" value={jobCategoryFilter} onChange={handleJobCategoryFilter}>
-          <option value="">All</option>
-          <option value="Insurance">Insurance</option>
-          <option value="Business">Business</option>
-          <option value="Engineering">Engineering</option>
-          <option value="HR">HR</option>
-        </select>
+      <div className='second-bar'>
+        <h2>Employee Names</h2>
+        <div className="filters">
+          <label htmlFor="jobCategoryFilter">Job Category:</label>
+          <select id="jobCategoryFilter" value={jobCategoryFilter} onChange={handleJobCategoryFilter}>
+            <option value="">All</option>
+            <option value="Insurance">Insurance</option>
+            <option value="Business">Business</option>
+            <option value="Engineering">Engineering</option>
+            <option value="HR">HR</option>
+          </select>
 
-        <label htmlFor="roleFilter">Role:</label>
-        <select id="roleFilter" value={roleFilter} onChange={handleRoleFilter}>
-          <option value="">All</option>
-          <option value="Manager">Manager</option>
-          <option value="HR">HR</option>
-          <option value="Employee">Employee</option>
-        </select>
+          <label htmlFor="roleFilter">Role:</label>
+          <select id="roleFilter" value={roleFilter} onChange={handleRoleFilter}>
+            <option value="">All</option>
+            <option value="Manager">Manager</option>
+            <option value="HR">HR</option>
+            <option value="Employee">Employee</option>
+          </select>
+        </div>
       </div>
 
       <div className="employee-boxes">

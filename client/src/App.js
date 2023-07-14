@@ -5,6 +5,8 @@ import Home from './components/Home';
 import EmployeeDetails from './components/EmployeeDetails';
 import LoginBox from './components/LoginBox';
 import SalaryPredictor from './components/salary_predictor'; // Import the SalaryPredictor component
+import logo from './imgs/Trav_Color.jpg'; // import the logo
+import './styles/main.css';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -28,25 +30,30 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <div>
-        {showNotification && <div className="notification">You've successfully logged in, Welcome {user.name}</div>}
-        <div>
-          <button onClick={user ? handleLogout : () => setShowLogin(true)}>
-            {user ? user.username : 'Login'}
-          </button>
-          {showLogin && (
-            <div onClick={closeLoginBox} style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)'}}>
-              <LoginBox />
-            </div>
-          )}
+      <div className='body'>
+        <div className='nav-bar'>
+          <div className="topbar">
+            <img src={logo} alt="Travelers Logo" />
+            <button className = "login-button" onClick={user ? handleLogout : () => setShowLogin(true)}>
+              {user ? user.username : 'Login'}
+            </button>
+          </div>
+          {showNotification && <div className="notification">You've successfully logged in, Welcome {user.name}</div>}
+          <div>
+            {showLogin && (
+              <div onClick={closeLoginBox} style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                <LoginBox />
+              </div>
+            )}
+          </div>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/employee/:id" element={<EmployeeDetails />} />
+              <Route path="/predict_salary" element={<SalaryPredictor />} />
+            </Routes>
+          </Router>
         </div>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/employee/:id" element={<EmployeeDetails />} />
-            <Route path="/predict_salary" element={<SalaryPredictor />} />
-          </Routes>
-        </Router>
       </div>
     </UserContext.Provider>
   );

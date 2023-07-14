@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'BattersonSans Light';
+    src: url('../fonts/BattersonSans-Light.otf') format('opentype');
+  }
+
 .login-box {
     /* Set position to fixed, and set top and left to 50% to center the box */
     position: fixed;
@@ -12,4 +17,24 @@
     /* Set transition for the opacity */
     transition: opacity 0.3s ease-in-out;
     opacity: 1;
+    font-family: 'BattersonSans Light', sans-serif;
+}
+
+.login-box label, input {
+    margin-bottom: 5px;
+}
+.login-box button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    position: 'fixed';
+    padding: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+.login-box button:hover {
+    background-color: #dadada;
 }
