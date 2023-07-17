@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c7d391d0.css",
+    "main.js": "/static/js/main.355babb1.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/BattersonSans-Bold.otf": "/static/media/BattersonSans-Bold.22b203016a535ee67c17.otf",
+    "static/media/BattersonSans-Light.otf": "/static/media/BattersonSans-Light.39ec16a58d72ec14f0d5.otf",
+    "static/media/Trav_Color.jpg": "/static/media/Trav_Color.d2729dc58293bc19b97a.jpg",
+    "index.html": "/index.html",
+    "main.c7d391d0.css.map": "/static/css/main.c7d391d0.css.map",
+    "main.355babb1.js.map": "/static/js/main.355babb1.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c7d391d0.css",
+    "static/js/main.355babb1.js"
+  ]
+}

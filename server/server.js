@@ -8,6 +8,8 @@ const path = require('path');
 const app = express();
 const port = 4000;
 
+app.use(express.static('./public'))
+
 app.use(cors());
 app.use(express.json());
 
@@ -17,10 +19,6 @@ mongoose.connect('mongodb://localhost:27017/hackathon_travelers', {
 });
 
 app.use(express.json()); // Use middleware to parse JSON
-
-app.get('/api/test', (req, res) => {
-    res.json({ message: 'Hello from server!' });
-});
 
 // POST a new employee
 app.post('/api/employees', async (req, res) => { 
