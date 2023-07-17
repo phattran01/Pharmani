@@ -108,6 +108,15 @@
   color: #797979;
 }
 
+.filter input {
+  font-size: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 5px;
+  border: 1px solid #ddd;
+  color: #797979;
+}
+
 .login-button {
   position: 'fixed';
   padding: 10px;
@@ -160,7 +169,8 @@
 }
 
 .employee-box img {
-  width: 75%;
+  padding-top: 10px;
+  width: 70%;
   border-radius: 50%; 
   overflow: hidden; 
   height: auto;
@@ -201,4 +211,25 @@
   color: #fff;
   border: none;
   cursor: pointer;
+}
+.load-more:hover {
+  background-color: #d62727;
+}
+
+.footer {
+  border-top: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
 }

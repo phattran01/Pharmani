@@ -12,7 +12,7 @@ from pymongo import MongoClient
 
 fake = faker.Faker()
 
-def generate_employee():
+def generate_employee(index):
     # Generate a boolean value for whether this employee is HR.
     is_hr = random.random() < 0.1
 
@@ -88,6 +88,11 @@ def generate_employee():
     # Generate a password
     # The pw_strength argument can be used to specify the complexity of the password.
     password = fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True)
+
+    # Generate photo URL
+    photo_index = (index % 99) + 1
+    photo_url = f"https://randomuser.me/api/portraits/{gender}/{photo_index}.jpg"
+
     return {
         "id": str(uuid.uuid4()),  # Generate a UUID for this employee.
         "name": name,
@@ -101,6 +106,7 @@ def generate_employee():
         "gender": gender,
         "username": username,
         "password": password,
+        "photo": photo_url
     }
 
 def populate_database(num_employees):
@@ -111,8 +117,8 @@ def populate_database(num_employees):
     manager_ids = []
 
     # First, generate some employees to serve as managers.
-    for _ in range(num_employees // 10):  # Let's say 10% of employees are managers.
-        manager = generate_employee()
+    for i in range(num_employees // 10):  # Let's say 10% of employees are managers.
+        manager = generate_employee(i)
         manager["role"] = "Manager"  # Explicitly set role as Manager.
         manager["jobRole"] += " Manager"
         result = employees.insert_one(manager)
@@ -120,15 +126,15 @@ def populate_database(num_employees):
 
     # If we have no managers (e.g., num_employees < 10), create at least one.
     if not manager_ids:
-        manager = generate_employee()
+        manager = generate_employee(0)
         manager["role"] = "Manager"  # Explicitly set role as Manager.
         manager["jobRole"] += " Manager"
         result = employees.insert_one(manager)
         manager_ids.append(result.inserted_id)
 
     # Then, generate the rest of the employees, randomly assigning them managers.
-    for _ in range(num_employees - len(manager_ids)):
-        employee = generate_employee()
+    for i in range(num_employees - len(manager_ids)):
+        employee = generate_employee(i + len(manager_ids))
         employee['manager'] = ObjectId(random.choice(manager_ids))
         employees.insert_one(employee)
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/PredictSalary.css';
 
 const PredictSalary = () => {
     const [jobRole, setJobRole] = useState("");
@@ -17,19 +18,20 @@ const PredictSalary = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>
+        <div className="predictSalaryContainer">
+            <h1>Predict Your Salary</h1>
+            <form onSubmit={handleSubmit} className="predictForm">
+                <label className="inputLabel">
                     Job Role:
-                    <input type="text" value={jobRole} onChange={(e) => setJobRole(e.target.value)} />
+                    <input className="inputField" type="text" value={jobRole} onChange={(e) => setJobRole(e.target.value)} />
                 </label>
-                <label>
+                <label className="inputLabel">
                     Work Location:
-                    <input type="text" value={workLocation} onChange={(e) => setWorkLocation(e.target.value)} />
+                    <input className="inputField" type="text" value={workLocation} onChange={(e) => setWorkLocation(e.target.value)} />
                 </label>
-                <input type="submit" value="Predict Salary" />
+                <input className="submitBtn" type="submit" value="Predict Salary" />
             </form>
-            {predictedSalary && <h2>Predicted Salary: ${predictedSalary.toFixed(2)}</h2>}
+            {predictedSalary && <h2 className="salaryDisplay">Predicted Salary: ${predictedSalary.toFixed(2)}</h2>}
         </div>
     );
 };

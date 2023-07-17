@@ -8,13 +8,18 @@ const Home = () => {
   const [jobCategoryFilter, setJobCategoryFilter] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
   const [isSticky, setIsSticky] = useState(false);
-  const [numDisplayed, setNumDisplayed] = useState(52); // new state variable for number of displayed employees
+  const [numDisplayed, setNumDisplayed] = useState(32);
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+  };
 
   useEffect(() => {
     const checkScroll = () => {
-      if (!isSticky && window.pageYOffset > 200) {  // 200 is a value of your choice
+      if (!isSticky && window.pageYOffset > 200) {
         setIsSticky(true);
-      } else if (isSticky && window.pageYOffset <= 200) {  // 200 is a value of your choice
+      } else if (isSticky && window.pageYOffset <= 200) {
         setIsSticky(false);
       }
     };
@@ -30,13 +35,8 @@ const Home = () => {
     fetch('http://localhost:4000/api/employees')
       .then((response) => response.json())
       .then((data) => {
-        const updatedData = data.map((employee, index) => {
-          const photoIndex = (index % 99) + 1;
-          employee.photo = `https://randomuser.me/api/portraits/${employee.gender}/${photoIndex}.jpg`;
-          return employee;
-        });
-        setEmployees(updatedData);
-        setFilteredEmployees(updatedData);
+        setEmployees(data);
+        setFilteredEmployees(data);
       });
   }, []);
 
@@ -44,11 +44,12 @@ const Home = () => {
     const filtered = employees.filter((employee) => {
       const matchJobCategory = jobCategoryFilter ? employee.jobCategory === jobCategoryFilter : true;
       const matchRole = roleFilter ? employee.role === roleFilter : true;
-      return matchJobCategory && matchRole;
+      const matchSearch = employee.name.toLowerCase().includes(searchValue.toLowerCase());
+      return matchJobCategory && matchRole && matchSearch;
     });
 
     setFilteredEmployees(filtered);
-  }, [jobCategoryFilter, roleFilter, employees]);
+  }, [jobCategoryFilter, roleFilter, employees, searchValue]);
 
   const handleJobCategoryFilter = (event) => {
     setJobCategoryFilter(event.target.value);
@@ -59,22 +60,31 @@ const Home = () => {
   };
 
   const loadMore = () => {
-    setNumDisplayed(numDisplayed + 52); // load 52 more employees when button is clicked
+    setNumDisplayed(numDisplayed + 32);
   };
 
   return (
     <div className="container">
       <div className="video-container">
-            <video className="stock-video" src="https://www.travelers.com/videos/tcom_homepage_video.mp4" autoPlay loop muted />
-            <div className="video-text">
-              <h2>The right insurance for you.</h2>
-              <p>We've got you covered every day and when it matters most.</p>
-            </div>
+        <video className="stock-video" src="https://www.travelers.com/videos/tcom_homepage_video.mp4" autoPlay loop muted />
+        <div className="video-text">
+          <h2>The right insurance for you.</h2>
+          <p>We've got you covered every day and when it matters most.</p>
+        </div>
       </div>
       <div className={isSticky ? 'second-bar sticky' : 'second-bar'}>
         <h2 className="title">Employee Directory</h2>
         <br/>
         <div className="filters">
+          <div className="filter">
+            <label htmlFor="searchBar">Search by name:</label>
+            <input 
+              id="searchBar"
+              type="text"
+              value={searchValue}
+              onChange={handleSearchChange}
+            />
+          </div>
           <div className= "filter">
             <label htmlFor="jobCategoryFilter">Job Category:</label>
             <select id="jobCategoryFilter" value={jobCategoryFilter} onChange={handleJobCategoryFilter}>
@@ -99,7 +109,14 @@ const Home = () => {
       <div className = "container-boxes">
         <div className="employee-boxes">
           {filteredEmployees.slice(0, numDisplayed).map((employee) => (
-            <Link to={`/employee/${employee.id}`} key={employee.id} className="employee-link">
+            <Link 
+              to={{
+                pathname: `/employee/${employee.id}`,
+                state: { photo: employee.photo },
+              }}
+              key={employee.id} 
+              className="employee-link"
+            >
               <div className="employee-box">
                 <img src={employee.photo} alt={`${employee.name}'s headshot`} />
                 <div className="employee-details">
@@ -111,7 +128,7 @@ const Home = () => {
           ))}
         </div>
         {numDisplayed < filteredEmployees.length && 
-          <button onClick={loadMore} className="load-more">Load More</button>
+          <button onClick={loadMore} className="load-more">More</button>
         }
       </div>
     </div>

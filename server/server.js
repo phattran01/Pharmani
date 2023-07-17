@@ -34,15 +34,25 @@ app.post('/api/employees', async (req, res) => {
     }
 });
 
-// GET all employees
+// GET all employees or employees of a specific manager
 app.get('/api/employees', async (req, res) => {
+    const { manager } = req.query;
+
     try {
-        const employees = await Employee.find();
+        let employees;
+
+        if(manager) {
+            employees = await Employee.find({ manager: mongoose.Types.ObjectId(manager) });
+        } else {
+            employees = await Employee.find();
+        }
+
         res.json(employees);
     } catch(err) {
         res.status(500).json({ message: err.message });
     }
 });
+
 
 // GET an employee by UUID
 app.get('/api/employees/:id', async (req, res) => {
@@ -57,6 +67,19 @@ app.get('/api/employees/:id', async (req, res) => {
     }
 });
 
+// GET an employee by MongoDB ObjectId
+app.get('/api/employees/:id', async (req, res) => {
+    try {
+      const employee = await Employee.findOne({ _id: req.params.id }).populate('manager');
+      if(employee == null) {
+        return res.status(404).json({ message: 'Employee not found' });
+      }
+      res.json(employee);
+    } catch(err) {
+      res.status(500).json({ message: err.message });
+    }
+});
+  
 // PUT (update) an existing employee
 app.put('/api/employees/:id', async (req, res) => {
     try {

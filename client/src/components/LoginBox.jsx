@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../UserContext';
 import '../styles/LoginBox.css'; //Assuming you have a CSS file for styling
+import logo from '../imgs/Trav_Color.jpg';
 
 function LoginBox() {
   const [username, setUsername] = useState("");
@@ -42,6 +43,8 @@ function LoginBox() {
 
   return (
     <div className="login-box" onClick={stopPropagation}>
+      <img src={logo} alt="Logo" style={{ width: '100%', height: '50px', marginBottom: '20px'}} />
+      <br/>
       <form onSubmit={handleSubmit}>
         <label>Username </label>
         <input 

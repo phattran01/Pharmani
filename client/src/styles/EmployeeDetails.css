@@ -1,0 +1,32 @@
+.employee-details-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    background: white;
+    border-radius: 5px;
+  }
+  .employee-details-title {
+    text-align: center;
+  }
+  .employee-details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .employee-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .employee-info p {
+    margin: 5px 0;
+  }
+  
+  .employee-info p strong {
+    font-weight: bold;
+    margin-right: 5px;
+  }

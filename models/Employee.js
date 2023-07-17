@@ -17,7 +17,8 @@ const EmployeeSchema = new Schema({
     role: String,
     gender: String,
     username: String,
-    password: String
+    password: String,
+    photo: String
 });
 
 const Employee = mongoose.model('Employee', EmployeeSchema);
